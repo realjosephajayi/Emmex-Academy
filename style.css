@@ -36,8 +36,8 @@ header.top .w{display:flex;justify-content:space-between;align-items:center;heig
 /* facts */
 .facts{background:var(--deep);color:#fff}
 .facts .w{display:grid;grid-template-columns:repeat(3,1fr)}
-.facts div{padding:34px 28px 34px 0}
-.facts div+div{padding-left:28px;border-left:1px solid rgba(142,197,238,.25)}
+.facts div{padding:38px 20px;text-align:center}
+.facts div+div{border-left:1px solid rgba(142,197,238,.25)}
 .facts b{font:400 3.4rem var(--serif);display:block;line-height:1;color:var(--sky)}
 .facts span{color:#b8cfe6;font-size:.95rem}
 
@@ -141,7 +141,7 @@ section+section{border-top:1px solid var(--line)}
 .menu a:not(.btn){display:none}
 .hero{padding:64px 0 72px}
 .facts .w{grid-template-columns:1fr}
-.facts div+div{padding-left:0;border-left:0;border-top:1px solid rgba(142,197,238,.25)}
+.facts div+div{border-left:0;border-top:1px solid rgba(142,197,238,.25)}
 .r{grid-template-columns:1fr;gap:12px}.r.hd{display:none}
 .cols,.about .cols{grid-template-columns:1fr;gap:48px}
 .ph{margin:0 24px 24px 0;max-width:380px}

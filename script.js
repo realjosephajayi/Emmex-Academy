@@ -1,14 +1,19 @@
 document.getElementById('f').addEventListener('submit',function(e){
   e.preventDefault();
   var F=this,C=window.EMMEX||{},fm=C.form||{},o=document.getElementById('ok'),b=F.querySelector('button'),d=new FormData(F),n=d.get('name'),t=d.get('track');
-  function wa(msg){o.textContent=msg+' ';var a=document.createElement('a');a.href='https://wa.me/2348139958101?text='+encodeURIComponent('Hello Emmex Academy, my name is '+n+'. I want to start with '+t+'.');a.target='_blank';a.rel='noopener';a.textContent='Message us on WhatsApp to confirm your place.';o.appendChild(a)}
-  if(!fm.endpoint){wa('Almost done.');return}
-  if(fm.accessKey)d.append('access_key',fm.accessKey);
+  var ep=(fm.endpoint||'').trim(),key=(fm.accessKey||'').trim();
+  if(ep&&ep.indexOf('http')!==0){key=key||ep;ep=''}          // a key pasted in the wrong place
+  if(!ep&&key)ep='https://api.web3forms.com/submit';          // key only: use Web3Forms
+  function link(){var a=document.createElement('a');a.href='https://wa.me/2348139958101?text='+encodeURIComponent('Hello Emmex Academy, my name is '+n+'. I want to start with '+t+'.');a.target='_blank';a.rel='noopener';a.textContent='Message us on WhatsApp';o.appendChild(a)}
+  function say(msg,withLink){o.textContent=msg+' ';if(withLink)link()}
+  if(!ep){say('Almost done.',true);return}
+  if(key)d.append('access_key',key);
   d.append('subject','New Emmex Academy sign-up');
-  b.disabled=true;o.textContent='Sending...';
-  fetch(fm.endpoint,{method:'POST',body:d,headers:{Accept:'application/json'}})
-    .then(function(r){if(!r.ok)throw new Error('fail');F.reset();wa('Thank you, '+n+'. We have your details.')})
-    .catch(function(){o.textContent='Sorry, that did not send. Please message us on WhatsApp instead.'})
+  b.disabled=true;say('Sending...');
+  fetch(ep,{method:'POST',body:d,headers:{Accept:'application/json'}})
+    .then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok||j.success===false)throw new Error(j.message||('Error '+r.status));})})
+    .then(function(){F.reset();say('Thank you, '+n+'. We have your details and will contact you soon.')})
+    .catch(function(err){say('Could not send ('+err.message+'). Please',false);link()})
     .then(function(){b.disabled=false});
 });
 
