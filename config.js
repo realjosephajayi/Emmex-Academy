@@ -3,7 +3,7 @@ window.EMMEX = {
   // Collect learner details (name, email, phone, track) and get them in your inbox.
   // Formspree:  endpoint "https://formspree.io/f/xxxxxxxx", accessKey ""
   // Web3Forms:  endpoint "https://api.web3forms.com/submit", accessKey "your-key"
-  form: { endpoint: "", accessKey: "949c3be0-2629-4a64-bab6-46ed69746f81" },
+  form: { endpoint: "", accessKey: "3ead5fe2-7cc8-4c8f-8cd2-a63bcf6c8c26" },
 
   // Social links: paste full links, e.g. "https://instagram.com/yourname"
   socials: { Instagram: "", TikTok: "", YouTube: "", Facebook: "", X: "" },
